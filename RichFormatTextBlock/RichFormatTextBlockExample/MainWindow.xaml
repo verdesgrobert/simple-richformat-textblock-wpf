@@ -4,7 +4,9 @@
         xmlns:richFormatTextBlock="clr-namespace:RichFormatTextBlock;assembly=RichFormatTextBlock"
         Title="MainWindow" Height="350" Width="525">
     <StackPanel>
+        <!--This is the hardcoded association example check the xaml.cs file for the rest of the code -->
         <TextBlock Margin="15" Name="txtExtra" TextWrapping="Wrap"/>
+        <!--This is the Binding association example check the xaml.cs file for the rest of the code -->
         <richFormatTextBlock:RichTextBlock Margin="15" Text="{Binding Text}" TextWrapping="Wrap" FontSize="20"/>
     </StackPanel>
 </Window>
