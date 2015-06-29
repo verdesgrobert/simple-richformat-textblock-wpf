@@ -22,4 +22,9 @@ Start tag accepting string values (HEX,KnownColor ecc, everything that this meth
 <b>[color=value]</b>  
 End tag <b>[color]</b>  
 
+<strong>Image:</strong>
+
+<b>[image=value]</b> – Start tag accepting string values (Path to image file supported by WPF)  
+<b>[image]</b> – End tag
+
 Many others coming in future versions.
