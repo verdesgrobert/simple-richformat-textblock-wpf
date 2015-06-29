@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Windows;
@@ -7,6 +8,9 @@ using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using Color = System.Windows.Media.Color;
+using ColorConverter = System.Windows.Media.ColorConverter;
+using Image = System.Windows.Controls.Image;
 
 namespace RichFormattextBlock
 {
@@ -42,7 +46,7 @@ namespace RichFormattextBlock
                         {
                             weights.RemoveAt(weights.Count - 1);
                         }
-                        else if (fParts[0] == "font")
+                        else if (fParts[0] == "fsize")
                         {
                             fontSizes.RemoveAt(fontSizes.Count - 1);
                         }
@@ -63,12 +67,24 @@ namespace RichFormattextBlock
                             if (convertFromString != null)
                                 weights.Add((FontWeight)convertFromString);
                         }
-                        else if (fParts[0] == "font")
+                        else if (fParts[0] == "fsize")
                         {
                             double fontSize = fontSizes.Last();
-                            var ok = double.TryParse(fParts[1], out fontSize);
+                            string fSize = fParts[1];
+                            if (fParts[1].StartsWith("+") || fParts[1].StartsWith("-"))
+                            {
+                                fSize = fParts[1].Substring(1);
+                            }
+                            var ok = double.TryParse(fSize, out fontSize);
+
                             if (ok)
+                            {
+                                if (fParts[1].StartsWith("+"))
+                                    fontSize = fontSizes.Last() + fontSize;
+                                if (fParts[1].StartsWith("-"))
+                                    fontSize = fontSizes.Last() - fontSize;
                                 fontSizes.Add(fontSize);
+                            }
                         }
                         else if (fParts[0] == "image")
                         {
