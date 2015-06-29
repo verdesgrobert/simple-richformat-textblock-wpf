@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RichFormatTextBlockExample", "RichFormatTextBlockExample\RichFormatTextBlockExample.csproj", "{99AD73F8-66BF-457A-A3B3-3EEE4F7B1A96}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RichFormatTextBlock", "RichFormatTextBlock\RichFormatTextBlock.csproj", "{FF46DCD8-A324-4F93-B7BC-819022242415}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{99AD73F8-66BF-457A-A3B3-3EEE4F7B1A96}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{99AD73F8-66BF-457A-A3B3-3EEE4F7B1A96}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{99AD73F8-66BF-457A-A3B3-3EEE4F7B1A96}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{99AD73F8-66BF-457A-A3B3-3EEE4F7B1A96}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FF46DCD8-A324-4F93-B7BC-819022242415}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FF46DCD8-A324-4F93-B7BC-819022242415}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FF46DCD8-A324-4F93-B7BC-819022242415}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FF46DCD8-A324-4F93-B7BC-819022242415}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

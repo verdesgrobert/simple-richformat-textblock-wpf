@@ -1,0 +1,5 @@
+*.cache
+RichFormatTextBlock/RichFormatTextBlockExample.v12.suo
+*bin*
+*obj*
+*.suo
