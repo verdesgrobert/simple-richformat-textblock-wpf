@@ -1,7 +1,10 @@
 # Simple RichFormat TextBlock for WPF
 Simple RichFormat TextBlock for WPF, you can use both with or without Binding
 
-###Accepted tags
+The markdown is basically in this format 
+`[property=value]content[property]`
+
+
 |Property|StartTag|EndTag|Value Type|Notes|
 --- | --- | --- | --- | ---
 |FontWeight|`[weight=value]`|`[weight]`|string|check <a href="https://msdn.microsoft.com/it-it/library/system.windows.fontweights(v=vs.110).aspx" target="_blank">MSDN</a> for accepted values|
