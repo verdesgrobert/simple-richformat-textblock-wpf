@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
@@ -38,74 +38,61 @@ namespace RichFormattextBlock
                     string[] fParts = format.Split('=');
                     if (fParts.Length == 1)//end tag
                     {
-                        if (fParts[0] == "color")
+                        switch (fParts[0])
                         {
-                            colors.RemoveAt(colors.Count - 1);
-                        }
-                        else if (fParts[0] == "weight")
-                        {
-                            weights.RemoveAt(weights.Count - 1);
-                        }
-                        else if (fParts[0] == "fsize")
-                        {
-                            fontSizes.RemoveAt(fontSizes.Count - 1);
+                            case "color":
+                                colors.RemoveAt(colors.Count - 1);
+                                break;
+                            case "weight":
+                                weights.RemoveAt(weights.Count - 1);
+                                break;
+                            case "fsize":
+                                fontSizes.RemoveAt(fontSizes.Count - 1);
+                                break;
                         }
                     }
                     else
                     {
-                        if (fParts[0] == "color")
+                        switch (fParts[0])
                         {
-                            string color = fParts[1];
-                            var convertFromString = ColorConverter.ConvertFromString(color);
+                            case "color":
+                                string color = fParts[1];
+                                var colorObj = ColorConverter.ConvertFromString(color);
 
-                            if (convertFromString != null)
-                                colors.Add((Color)convertFromString);
-                        }
-                        else if (fParts[0] == "weight")
-                        {
-                            var convertFromString = new FontWeightConverter().ConvertFromString(fParts[1]);
-                            if (convertFromString != null)
-                                weights.Add((FontWeight)convertFromString);
-                        }
-                        else if (fParts[0] == "fsize")
-                        {
-                            double fontSize = fontSizes.Last();
-                            string fSize = fParts[1];
-                            if (fParts[1].StartsWith("+") || fParts[1].StartsWith("-"))
-                            {
-                                fSize = fParts[1].Substring(1);
-                            }
-                            var ok = double.TryParse(fSize, out fontSize);
+                                if (colorObj != null)
+                                    colors.Add((Color)colorObj);
+                                break;
 
-                            if (ok)
-                            {
-                                if (fParts[1].StartsWith("+"))
-                                    fontSize = fontSizes.Last() + fontSize;
-                                if (fParts[1].StartsWith("-"))
-                                    fontSize = fontSizes.Last() - fontSize;
-                                fontSizes.Add(fontSize);
-                            }
-                        }
-                        else if (fParts[0] == "image")
-                        {
-                            string imageUrl = fParts[1];
+                            case "weight":
+                                var fontWeight = new FontWeightConverter().ConvertFromString(fParts[1]);
+                                if (fontWeight != null)
+                                    weights.Add((FontWeight)fontWeight);
+                                break;
 
-                            if (File.Exists(imageUrl))
-                            {
-                                Image imgMessage = new Image();
-                                imgMessage.Height = textBlock.FontSize * 1.2;
-                                BitmapImage bi = new BitmapImage();
+                            case "fsize":
+                                double fontSize = fontSizes.Last();
+                                string fSize = fParts[1];
+                                if (fParts[1].StartsWith("+") || fParts[1].StartsWith("-"))
+                                {
+                                    fSize = fParts[1].Substring(1);
+                                }
+                                var ok = double.TryParse(fSize, out fontSize);
 
-                                bi.BeginInit();
-                                bi.UriSource = new Uri(imageUrl, UriKind.RelativeOrAbsolute);
-                                bi.EndInit();
+                                if (ok)
+                                {
+                                    if (fParts[1].StartsWith("+"))
+                                        fontSize = fontSizes.Last() + fontSize;
+                                    if (fParts[1].StartsWith("-"))
+                                        fontSize = fontSizes.Last() - fontSize;
+                                    fontSizes.Add(fontSize);
+                                }
 
-                                imgMessage.Source = bi;
-                                InlineUIContainer iuc = new InlineUIContainer(imgMessage);
-                                iuc.BaselineAlignment = BaselineAlignment.Center;
-                                textBlock.Inlines.Add(iuc);
-                                //continue;
-                            }
+                                break;
+
+                            case "image":
+                                string imageUrl = fParts[1];
+                                AddImage(textBlock, imageUrl, 1.2, BaselineAlignment.Center);
+                                break;
                         }
                     }
                 }
@@ -123,6 +110,25 @@ namespace RichFormattextBlock
                         BaselineAlignment = BaselineAlignment.Center
                     });
                 }
+            }
+        }
+
+        private static void AddImage(TextBlock textBlock, string imageUrl, double lineHeight = 1.2, BaselineAlignment alignment = BaselineAlignment.Center)
+        {
+            if (File.Exists(imageUrl))
+            {
+                Image imgMessage = new Image();
+                imgMessage.Height = textBlock.FontSize * lineHeight;
+                BitmapImage bi = new BitmapImage();
+
+                bi.BeginInit();
+                bi.UriSource = new Uri(imageUrl, UriKind.RelativeOrAbsolute);
+                bi.EndInit();
+
+                imgMessage.Source = bi;
+                InlineUIContainer iuc = new InlineUIContainer(imgMessage);
+                iuc.BaselineAlignment = alignment;
+                textBlock.Inlines.Add(iuc);
             }
         }
     }
